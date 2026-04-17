@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enfermería 24/7 | Bienestar Azul</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Poppins:wght@400;700;900&display=swap');
+
+        :root {
+            --azul-fondo: #d0e1f9;
+            --azul-tarjeta: #b3cde0;
+            --azul-fuerte: #1e3a5f;
+            --azul-acento: #6497b1;
+            --azul-brillante: #005b96;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            background-color: var(--azul-fondo);
+            color: var(--azul-fuerte);
+            padding: 40px 20px;
+        }
+
+        .main-container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 70px;
+        }
+
+        .header-title {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: clamp(2rem, 8vw, 3.5rem);
+            color: var(--azul-fuerte);
+            text-transform: uppercase;
+            margin: 0;
+            letter-spacing: -2px;
+        }
+
+        .card-section {
+            background: var(--azul-tarjeta);
+            display: flex;
+            flex-wrap: wrap;
+            border-radius: 40px;
+            overflow: hidden;
+            margin-bottom: 60px;
+            box-shadow: 15px 15px 30px rgba(0,0,0,0.05);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .card-reverse { flex-direction: row-reverse; }
+
+        .image-box {
+            flex: 1;
+            min-width: 350px;
+            height: 500px;
+            background: var(--azul-acento);
+        }
+
+        .image-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .content-box {
+            flex: 1;
+            padding: 60px;
+            min-width: 350px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        h2 {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 2.8rem;
+            line-height: 1;
+            margin-bottom: 20px;
+            color: var(--azul-fuerte);
+        }
+
+        .price-massive {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 4.5rem;
+            color: var(--azul-brillante);
+            margin: 10px 0;
+        }
+
+        .promo-pill {
+            background: var(--azul-fuerte);
+            color: var(--azul-fondo);
+            padding: 8px 20px;
+            border-radius: 10px;
+            font-weight: 900;
+            display: inline-block;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+
+        .benefit-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .benefit-item {
+            font-weight: 700;
+            font-size: 0.95rem;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px;
+            border-radius: 12px;
+        }
+
+        .cta-wrapper {
+            text-align: center;
+            padding: 40px;
+        }
+
+        .btn-whatsapp {
+            font-family: 'Archivo Black', sans-serif;
+            background: var(--azul-fuerte);
+            color: var(--azul-fondo);
+            padding: 25px 60px;
+            text-decoration: none;
+            font-size: 1.5rem;
+            border-radius: 20px;
+            display: inline-block;
+            transition: 0.3s;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-whatsapp:hover {
+            transform: translateY(-5px);
+            background: var(--azul-brillante);
+        }
+
+        .secure-phone {
+            margin-top: 20px;
+            font-weight: 700;
+            color: var(--azul-fuerte);
+            opacity: 0.8;
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 768px) {
+            .image-box { height: 300px; }
+            .content-box { padding: 30px; }
+            h2 { font-size: 2rem; }
+            .price-massive { font-size: 3rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="main-container">
+    <header>
+        <h1 class="header-title">ENFERMERÍA 24/7</h1>
+        <p style="font-weight: 700; letter-spacing: 4px; color: var(--azul-acento);">SIEMPRE CONTIGO 💙</p>
+    </header>
+
+    <section class="card-section">
+        <div class="content-box">
+            <div class="promo-pill">PROMO ABRIL 50% OFF</div>
+            <h2>10 SESIONES DE FISIOTERAPIA</h2>
+            <p style="margin:0; opacity: 0.7; font-weight: 700;">Antes: $200</p>
+            <div class="price-massive">$100</div>
+            <p>Especialistas en dolores musculares, lesiones y rehabilitación integral.</p>
+        </div>
+        <div class="image-box">
+            <img src="1.jpg" alt="Fisioterapia">
+        </div>
+    </section>
+
+    <section class="card-section card-reverse">
+        <div class="content-box">
+            <h2>DRENAJE LINFÁTICO</h2>
+            <p>Mejora tu salud con nuestro tratamiento profesional:</p>
+            <div class="benefit-grid">
+                <div class="benefit-item">✓ Linfedema</div>
+                <div class="benefit-item">✓ Artritis</div>
+                <div class="benefit-item">✓ Edemas</div>
+                <div class="benefit-item">✓ Postoperatorio</div>
+                <div class="benefit-item">✓ Celulitis</div>
+                <div class="benefit-item">✓ Fibromialgia</div>
+            </div>
+        </div>
+        <div class="image-box">
+            <img src="2.jpg" alt="Drenaje Linfático">
+        </div>
+    </section>
+
+    <div class="cta-wrapper">
+        <button onclick="st_run()" class="btn-whatsapp">
+            AGENDA TU CITA YA
+        </button>
+        <div class="secure-phone">
+            Contacto: <span>(+593) &#57;&#57;&#32;&#57;&#57;&#53;&#32;&#50;&#49;&#53;&#57;</span>
+        </div>
+        <p style="margin-top: 10px; font-weight: 700; opacity: 0.5;">CUPOS LIMITADOS PARA EL MES DE ABRIL</p>
+    </div>
+</div>
+
+<script>
+    function st_run() {
+        var _v = [53, 57, 51, 57, 57, 57, 57, 53, 50, 49, 53, 57];
+        var _r = "";
+        for (var i = 0; i < _v.length; i++) {
+            _r += String.fromCharCode(_v[i]);
+        }
+        var _u = "https://wa.me/" + _r.replace(/\s/g, '') + "?text=" + encodeURIComponent("Hola, me gustaría agendar una cita.");
+        window.open(_u, '_blank');
+    }
+</script>
+
+</body>
+</html>
