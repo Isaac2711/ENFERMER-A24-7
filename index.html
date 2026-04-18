@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enfermería 24/7 | Bienestar Azul</title>
+    <title>Enfermería 24/7 | Cuidado de Corazón</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Poppins:wght@400;700;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Poppins:wght@400;600;700;900&display=swap');
 
         :root {
             --azul-fondo: #d0e1f9;
@@ -13,6 +13,7 @@
             --azul-fuerte: #1e3a5f;
             --azul-acento: #6497b1;
             --azul-brillante: #005b96;
+            --promo-rosa: #d81b60;
         }
 
         body {
@@ -23,140 +24,113 @@
             padding: 40px 20px;
         }
 
-        .main-container {
-            max-width: 1100px;
-            margin: 0 auto;
-        }
+        .main-container { max-width: 1100px; margin: 0 auto; }
 
-        header {
-            text-align: center;
-            margin-bottom: 70px;
-        }
+        header { text-align: center; margin-bottom: 60px; }
 
         .header-title {
             font-family: 'Archivo Black', sans-serif;
-            font-size: clamp(2rem, 8vw, 3.5rem);
+            font-size: clamp(2.5rem, 8vw, 3.8rem);
             color: var(--azul-fuerte);
             text-transform: uppercase;
             margin: 0;
             letter-spacing: -2px;
         }
 
+        /* SECCIONES DE TARJETAS GRANDES */
         .card-section {
             background: var(--azul-tarjeta);
             display: flex;
             flex-wrap: wrap;
             border-radius: 40px;
             overflow: hidden;
-            margin-bottom: 60px;
+            margin-bottom: 40px;
             box-shadow: 15px 15px 30px rgba(0,0,0,0.05);
-            border: 1px solid rgba(255,255,255,0.2);
         }
 
         .card-reverse { flex-direction: row-reverse; }
 
-        .image-box {
-            flex: 1;
-            min-width: 350px;
-            height: 500px;
-            background: var(--azul-acento);
-        }
-
-        .image-box img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-
         .content-box {
-            flex: 1;
-            padding: 60px;
-            min-width: 350px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+            flex: 1; padding: 50px; min-width: 320px;
+            display: flex; flex-direction: column; justify-content: center;
         }
 
-        h2 {
-            font-family: 'Archivo Black', sans-serif;
-            font-size: 2.8rem;
-            line-height: 1;
-            margin-bottom: 20px;
-            color: var(--azul-fuerte);
-        }
+        .content-box h2 { font-family: 'Archivo Black', sans-serif; font-size: 2.2rem; line-height: 1.1; margin-bottom: 25px; }
+        .content-box p { font-size: 1.1rem; line-height: 1.8; color: #2c4a70; }
 
-        .price-massive {
-            font-family: 'Archivo Black', sans-serif;
-            font-size: 4.5rem;
-            color: var(--azul-brillante);
-            margin: 10px 0;
-        }
+        .image-box { flex: 1; min-width: 320px; height: 500px; background: var(--azul-acento); }
+        .image-box img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-        .promo-pill {
-            background: var(--azul-fuerte);
-            color: var(--azul-fondo);
-            padding: 8px 20px;
-            border-radius: 10px;
-            font-weight: 900;
-            display: inline-block;
-            margin-bottom: 15px;
-            font-size: 0.9rem;
-        }
-
-        .benefit-grid {
+        /* GRID DE SERVICIOS */
+        .services-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-top: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
         }
 
-        .benefit-item {
-            font-weight: 700;
-            font-size: 0.95rem;
-            background: rgba(255, 255, 255, 0.2);
-            padding: 10px;
-            border-radius: 12px;
+        .service-card {
+            background: rgba(255,255,255,0.3);
+            padding: 30px;
+            border-radius: 30px;
+            border: 1px solid rgba(255,255,255,0.5);
         }
 
-        .cta-wrapper {
-            text-align: center;
-            padding: 40px;
-        }
+        .service-card h3 { font-family: 'Archivo Black', sans-serif; font-size: 1.1rem; margin-bottom: 15px; color: var(--azul-brillante); }
+        .service-card ul { list-style: none; padding: 0; margin: 0; }
+        .service-card li { margin-bottom: 8px; font-weight: 700; font-size: 0.9rem; }
 
-        .btn-whatsapp {
-            font-family: 'Archivo Black', sans-serif;
+        /* PAQUETE CTA */
+        .paquete-cta {
             background: var(--azul-fuerte);
-            color: var(--azul-fondo);
-            padding: 25px 60px;
-            text-decoration: none;
-            font-size: 1.5rem;
-            border-radius: 20px;
-            display: inline-block;
-            transition: 0.3s;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            color: white;
+            padding: 60px 40px;
+            border-radius: 40px;
+            text-align: center;
+            margin-bottom: 40px;
             cursor: pointer;
-            border: none;
+            transition: 0.3s;
+        }
+        .paquete-cta:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+
+        /* ESTILO DE PRECIO PROMO */
+        .promo-pill { background: var(--azul-fuerte); color: white; padding: 5px 15px; border-radius: 8px; font-weight: 900; display: inline-block; margin-bottom: 10px; }
+        .price-massive { font-family: 'Archivo Black', sans-serif; font-size: 4.5rem; color: var(--azul-brillante); margin: 10px 0; line-height: 1; }
+
+        /* BOTONES */
+        .btn-main {
+            font-family: 'Archivo Black', sans-serif;
+            padding: 22px 40px; border-radius: 20px; border: none;
+            cursor: pointer; transition: 0.3s; text-transform: uppercase;
+            display: inline-block; text-decoration: none;
+        }
+        .btn-blue { background: var(--azul-fuerte); color: white; }
+        .btn-white { background: white; color: var(--azul-fuerte); }
+        .btn-whatsapp-footer {
+            background: #25d366; color: white; width: 100%; max-width: 500px;
+            font-size: 1.4rem; margin-top: 20px;
         }
 
-        .btn-whatsapp:hover {
-            transform: translateY(-5px);
-            background: var(--azul-brillante);
+        /* MODAL */
+        .modal {
+            display: none; position: fixed; z-index: 10000;
+            left: 0; top: 0; width: 100%; height: 100%;
+            background: rgba(26, 60, 94, 0.95); backdrop-filter: blur(10px);
+            overflow-y: auto; padding: 20px 0;
         }
-
-        .secure-phone {
-            margin-top: 20px;
-            font-weight: 700;
-            color: var(--azul-fuerte);
-            opacity: 0.8;
-            font-size: 1.1rem;
+        .modal-content {
+            background: var(--azul-fondo); margin: auto; padding: 40px;
+            border-radius: 40px; width: 90%; max-width: 650px;
         }
+        .modal-category { margin-bottom: 25px; }
+        .modal-category h4 { font-family: 'Archivo Black', sans-serif; font-size: 0.9rem; color: var(--azul-brillante); border-bottom: 2px solid var(--azul-tarjeta); padding-bottom: 5px; margin-bottom: 15px; }
+        .check-item { background: white; padding: 15px; border-radius: 12px; display: flex; align-items: center; gap: 12px; margin-bottom: 8px; cursor: pointer; font-weight: 700; font-size: 0.9rem; }
+        .check-item input { transform: scale(1.3); }
 
         @media (max-width: 768px) {
-            .image-box { height: 300px; }
             .content-box { padding: 30px; }
-            h2 { font-size: 2rem; }
-            .price-massive { font-size: 3rem; }
+            .image-box { height: 350px; }
+            .price-massive { font-size: 3.5rem; }
         }
     </style>
 </head>
@@ -165,61 +139,146 @@
 <div class="main-container">
     <header>
         <h1 class="header-title">ENFERMERÍA 24/7</h1>
-        <p style="font-weight: 700; letter-spacing: 4px; color: var(--azul-acento);">SIEMPRE CONTIGO 💙</p>
+        <p style="font-weight: 700; letter-spacing: 4px; opacity: 0.7;">CUIDADO PROFESIONAL CON CALIDEZ HUMANA 💙</p>
     </header>
 
     <section class="card-section">
         <div class="content-box">
-            <div class="promo-pill">PROMO ABRIL 50% OFF</div>
-            <h2>10 SESIONES DE FISIOTERAPIA</h2>
-            <p style="margin:0; opacity: 0.7; font-weight: 700;">Antes: $200</p>
-            <div class="price-massive">$100</div>
-            <p>Especialistas en dolores musculares, lesiones y rehabilitación integral.</p>
+            <h2>NUESTRA PROMESA: <br>ESTAR AHÍ, DE VERDAD.</h2>
+            <p>
+                Entendemos que detrás de cada paciente hay una historia, una familia y un corazón que busca tranquilidad. Por eso, nuestro servicio no se limita a cumplir un horario; se trata de <strong>acompañar con ternura, respeto y una sonrisa</strong> que alivie el alma.
+                <br><br>
+                Queremos que te sientas <strong>seguro, escuchado y profundamente cuidado</strong> en la comodidad de tu hogar. Porque para nosotros, sanar el cuerpo empieza por cuidar el espíritu.
+            </p>
         </div>
-        <div class="image-box">
-            <img src="1.jpg" alt="Fisioterapia">
-        </div>
+        <div class="image-box"><img src="1.jpg" alt="Conexión Humana"></div>
     </section>
+
+    <div class="services-grid">
+        <div class="service-card">
+            <h3>ENFERMERÍA</h3>
+            <ul><li>• Guardias 24h</li><li>• Signos vitales</li><li>• Inyectología</li></ul>
+        </div>
+        <div class="service-card">
+            <h3>REHABILITACIÓN</h3>
+            <ul><li>• Terapia Física</li><li>• Masajes</li><li>• Postparto</li></ul>
+        </div>
+        <div class="service-card">
+            <h3>CUIDADOS</h3>
+            <ul><li>• Curaciones</li><li>• Sonda Vesical</li><li>• Higiene</li></ul>
+        </div>
+        <div class="service-card">
+            <h3>BIENESTAR</h3>
+            <ul><li>• Guía alimenticia</li><li>• Ludoterapia</li></ul>
+        </div>
+    </div>
 
     <section class="card-section card-reverse">
         <div class="content-box">
             <h2>DRENAJE LINFÁTICO</h2>
-            <p>Mejora tu salud con nuestro tratamiento profesional:</p>
-            <div class="benefit-grid">
-                <div class="benefit-item">✓ Linfedema</div>
-                <div class="benefit-item">✓ Artritis</div>
-                <div class="benefit-item">✓ Edemas</div>
-                <div class="benefit-item">✓ Postoperatorio</div>
-                <div class="benefit-item">✓ Celulitis</div>
-                <div class="benefit-item">✓ Fibromialgia</div>
+            <p>Tratamientos especializados para tu recuperación y salud:</p>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px;">
+                <div style="background: rgba(255,255,255,0.4); padding: 10px; border-radius: 12px; font-weight: 700; font-size: 0.85rem;">✓ Linfedema</div>
+                <div style="background: rgba(255,255,255,0.4); padding: 10px; border-radius: 12px; font-weight: 700; font-size: 0.85rem;">✓ Artritis</div>
+                <div style="background: rgba(255,255,255,0.4); padding: 10px; border-radius: 12px; font-weight: 700; font-size: 0.85rem;">✓ Postoperatorio</div>
+                <div style="background: rgba(255,255,255,0.4); padding: 10px; border-radius: 12px; font-weight: 700; font-size: 0.85rem;">✓ Fibromialgia</div>
             </div>
         </div>
-        <div class="image-box">
-            <img src="2.jpg" alt="Drenaje Linfático">
-        </div>
+        <div class="image-box"><img src="2.jpg" alt="Drenaje Linfático"></div>
     </section>
 
-    <div class="cta-wrapper">
-        <button onclick="st_run()" class="btn-whatsapp">
-            AGENDA TU CITA YA
-        </button>
-        <div class="secure-phone">
-            Contacto: <span>(+593) &#57;&#57;&#32;&#57;&#57;&#53;&#32;&#50;&#49;&#53;&#57;</span>
+    <section class="paquete-cta" onclick="openModal()">
+        <h2 style="font-family: 'Archivo Black'; color: white; margin: 0;">📦 PERSONALIZA TU ATENCIÓN</h2>
+        <p style="font-size: 1.1rem; opacity: 0.9;">Selecciona los servicios que necesitas y armaremos un plan a tu medida.</p>
+        <button class="btn-main btn-white" style="margin-top: 20px;">CONFIGURAR MI PAQUETE</button>
+    </section>
+
+    <section class="card-section">
+        <div class="content-box">
+            <div class="promo-pill">PROMO MES DE ABRIL</div>
+            <h2>FISIOTERAPIA DOMICILIO</h2>
+            <p style="margin:0; opacity: 0.7; font-weight: 700;">Paquete Especial de 10 Sesiones</p>
+            <div class="price-massive">$100</div>
+            <p style="font-weight: 900; color: var(--promo-rosa); margin-bottom: 20px;">¡AHORRA EL 50%!</p>
+            <button onclick="st_run('Promo Fisioterapia $100')" class="btn-main btn-blue">AGENDAR PROMO YA</button>
         </div>
-        <p style="margin-top: 10px; font-weight: 700; opacity: 0.5;">CUPOS LIMITADOS PARA EL MES DE ABRIL</p>
+        <div class="image-box"><img src="3.jpg" alt="Promoción Fisioterapia"></div>
+    </section>
+
+    <div style="text-align: center; padding: 60px 0;">
+        <h2 style="font-family: 'Archivo Black';">¿TIENES DUDAS?</h2>
+        <p style="font-weight: 600; margin-bottom: 20px;">Estamos disponibles 24/7 para atenderte de inmediato.</p>
+        <button onclick="st_run('Consulta General')" class="btn-main btn-whatsapp-footer">
+            💬 CONTACTAR POR WHATSAPP
+        </button>
+        <p style="font-weight: 800; opacity: 0.4; margin-top: 30px; letter-spacing: 2px;">ENFERMERÍA 24/7 • SIEMPRE CONTIGO</p>
+    </div>
+</div>
+
+<div id="mS" class="modal">
+    <div class="modal-content">
+        <h2 style="text-align: center; font-family: 'Archivo Black';">DISEÑA TU PLAN</h2>
+        <p style="text-align: center; margin-bottom: 30px; font-size: 0.9rem;">Selecciona todo lo que te gustaría incluir:</p>
+        
+        <div id="servList">
+            <div class="modal-category">
+                <h4>🩺 Enfermería</h4>
+                <label class="check-item"><input type="checkbox" value="Guardias 24h"> Guardias 24h</label>
+                <label class="check-item"><input type="checkbox" value="Signos Vitales"> Signos Vitales</label>
+                <label class="check-item"><input type="checkbox" value="Inyectología"> Inyectología</label>
+            </div>
+            <div class="modal-category">
+                <h4>💪 Rehabilitación</h4>
+                <label class="check-item"><input type="checkbox" value="Terapia Física"> Terapia Física</label>
+                <label class="check-item"><input type="checkbox" value="Masajes"> Masajes</label>
+                <label class="check-item"><input type="checkbox" value="Postparto"> Postparto</label>
+            </div>
+            <div class="modal-category">
+                <h4>🩹 Cuidados</h4>
+                <label class="check-item"><input type="checkbox" value="Curaciones"> Curaciones</label>
+                <label class="check-item"><input type="checkbox" value="Sonda Vesical"> Sonda Vesical</label>
+                <label class="check-item"><input type="checkbox" value="Higiene"> Higiene</label>
+            </div>
+            <div class="modal-category">
+                <h4>💧 Drenaje Linfático</h4>
+                <label class="check-item"><input type="checkbox" value="Linfedema"> Linfedema</label>
+                <label class="check-item"><input type="checkbox" value="Artritis"> Artritis</label>
+                <label class="check-item"><input type="checkbox" value="Fibromialgia"> Fibromialgia</label>
+            </div>
+            <div class="modal-category">
+                <h4>✨ Bienestar</h4>
+                <label class="check-item"><input type="checkbox" value="Guía Alimenticia"> Guía Alimenticia</label>
+                <label class="check-item"><input type="checkbox" value="Ludoterapia"> Ludoterapia</label>
+            </div>
+        </div>
+
+        <button onclick="sendP()" class="btn-main btn-blue" style="width: 100%;">ENVIAR MI PAQUETE</button>
+        <p onclick="closeModal()" style="text-align: center; color: red; font-weight: 700; cursor: pointer; margin-top: 20px;">[ CERRAR ]</p>
     </div>
 </div>
 
 <script>
-    function st_run() {
+    function getNum() {
         var _v = [53, 57, 51, 57, 57, 57, 57, 53, 50, 49, 53, 57];
         var _r = "";
-        for (var i = 0; i < _v.length; i++) {
-            _r += String.fromCharCode(_v[i]);
-        }
-        var _u = "https://wa.me/" + _r.replace(/\s/g, '') + "?text=" + encodeURIComponent("Hola, me gustaría agendar una cita.");
-        window.open(_u, '_blank');
+        for (var i = 0; i < _v.length; i++) { _r += String.fromCharCode(_v[i]); }
+        return _r.replace(/\s/g, '');
     }
+
+    function st_run(t) { window.open("https://wa.me/" + getNum() + "?text=" + encodeURIComponent("Hola! " + t), '_blank'); }
+
+    function openModal() { document.getElementById('mS').style.display='block'; document.body.style.overflow='hidden'; }
+    function closeModal() { document.getElementById('mS').style.display='none'; document.body.style.overflow='auto'; }
+
+    function sendP() {
+        var s = [];
+        document.querySelectorAll('#servList input:checked').forEach(c => s.push(c.value));
+        if(s.length === 0) return alert("Por favor, selecciona al menos un servicio.");
+        var m = "Hola! Quiero un presupuesto para este paquete personalizado:\n- " + s.join("\n- ");
+        window.open("https://wa.me/" + getNum() + "?text=" + encodeURIComponent(m), '_blank');
+    }
+
+    window.onclick = function(e) { if(e.target == document.getElementById('mS')) closeModal(); }
 </script>
 
 </body>
