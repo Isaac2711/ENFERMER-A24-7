@@ -1,1 +1,304 @@
 
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enfermería 24/7 | Cuidado Profesional</title>
+    <!-- Librería de Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Poppins:wght@400;600;700;900&display=swap');
+
+        :root {
+            --azul-fondo: #d0e1f9;
+            --azul-tarjeta: #b3cde0;
+            --azul-fuerte: #1e3a5f;
+            --azul-acento: #6497b1;
+            --azul-brillante: #005b96;
+            --promo-rosa: #d81b60;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            background-color: var(--azul-fondo);
+            color: var(--azul-fuerte);
+            padding: 40px 20px;
+        }
+
+        .main-container { max-width: 1300px; margin: 0 auto; }
+
+        header { text-align: center; margin-bottom: 60px; }
+        .header-title {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: clamp(2.2rem, 8vw, 3.8rem);
+            text-transform: uppercase;
+            margin: 0;
+            letter-spacing: -2px;
+            line-height: 1;
+        }
+
+        /* SECCIÓN PROMESA */
+        .card-section {
+            background: var(--azul-tarjeta);
+            display: flex;
+            flex-wrap: wrap;
+            border-radius: 40px;
+            overflow: hidden;
+            margin-bottom: 60px;
+            box-shadow: 15px 15px 30px rgba(0,0,0,0.05);
+        }
+        .content-box { flex: 1; padding: 50px; min-width: 320px; display: flex; flex-direction: column; justify-content: center; }
+        .content-box h2 { font-family: 'Archivo Black', sans-serif; font-size: 2.2rem; line-height: 1.1; margin-bottom: 25px; }
+        .image-box { flex: 1; min-width: 320px; height: 450px; }
+        .image-box img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+        .section-title {
+            font-family: 'Archivo Black', sans-serif;
+            text-align: center;
+            font-size: 2.2rem;
+            margin: 50px 0 30px;
+            text-transform: uppercase;
+        }
+
+        /* GRID SISTEMA */
+        .grid-layout {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        /* TARJETAS */
+        .card-item {
+            background: rgba(255,255,255,0.4);
+            border-radius: 30px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.6);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+        .card-item:hover { transform: translateY(-10px); background: rgba(255,255,255,0.7); }
+
+        .card-img-container { width: 100%; height: 200px; background: var(--azul-acento); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+        .card-img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+        .img-label { position: absolute; color: white; font-weight: 900; font-size: 0.9rem; opacity: 0.6; text-transform: uppercase; }
+
+        .card-body { padding: 25px; display: flex; flex-direction: column; flex-grow: 1; }
+        .card-item h3 { font-family: 'Archivo Black', sans-serif; font-size: 1.1rem; color: var(--azul-brillante); margin: 0 0 15px 0; text-transform: uppercase; }
+        
+        .card-item ul { list-style: none; padding: 0; margin: 0 0 20px 0; flex-grow: 1; }
+        .card-item li { margin-bottom: 8px; font-weight: 700; font-size: 0.85rem; display: flex; align-items: center; line-height: 1.3; }
+        .card-item li::before { content: "✓"; color: var(--azul-acento); margin-right: 8px; font-weight: 900; }
+
+        .price-tag { font-family: 'Archivo Black', sans-serif; font-size: 1.8rem; margin-bottom: 15px; color: var(--azul-fuerte); }
+
+        /* BOTONES */
+        .btn-main {
+            font-family: 'Archivo Black', sans-serif;
+            padding: 16px 20px; border-radius: 18px; border: none;
+            cursor: pointer; transition: 0.3s; text-transform: uppercase;
+            text-align: center; font-size: 0.85rem; text-decoration: none;
+        }
+        .btn-blue { background: var(--azul-fuerte); color: white; width: 100%; }
+        .btn-rosa { background: var(--promo-rosa); color: white; width: 100%; }
+        .btn-blue:hover, .btn-rosa:hover { filter: brightness(1.2); transform: scale(1.02); }
+
+        /* MODAL CONFIGURADOR */
+        .modal {
+            display: none; position: fixed; z-index: 9999;
+            left: 0; top: 0; width: 100%; height: 100%;
+            background: rgba(30, 58, 95, 0.9); backdrop-filter: blur(8px);
+            overflow-y: auto; padding: 40px 0;
+        }
+        .modal-content {
+            background: var(--azul-fondo); margin: auto; padding: 35px;
+            border-radius: 40px; width: 90%; max-width: 550px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+        }
+        .check-list { display: flex; flex-direction: column; gap: 10px; margin: 20px 0; max-height: 400px; overflow-y: auto; padding-right: 10px; }
+        .check-item { 
+            background: white; padding: 15px; border-radius: 15px; 
+            display: flex; align-items: center; gap: 15px; 
+            cursor: pointer; font-weight: 700; font-size: 0.9rem;
+            transition: 0.2s; border: 2px solid transparent;
+        }
+        .check-item:hover { background: var(--azul-tarjeta); }
+        .check-item input { transform: scale(1.4); accent-color: var(--azul-fuerte); }
+
+        /* SCROLLBAR MODAL */
+        .check-list::-webkit-scrollbar { width: 6px; }
+        .check-list::-webkit-scrollbar-thumb { background: var(--azul-acento); border-radius: 10px; }
+
+        @media (max-width: 768px) {
+            .image-box { order: 2; height: 300px; }
+            .content-box { order: 1; padding: 30px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="main-container">
+    <header>
+        <h1 class="header-title">ENFERMERÍA 24/7</h1>
+        <p style="font-weight: 700; letter-spacing: 3px; opacity: 0.7; margin-top: 10px;">CUIDADO PROFESIONAL Y HUMANO</p>
+    </header>
+
+    <!-- PROMESA -->
+    <section class="card-section">
+        <div class="content-box">
+            <h2>NUESTRA PROMESA: <br>ESTAR AHÍ, SIEMPRE.</h2>
+            <p>
+                No solo somos enfermeros, somos compañeros en el camino hacia la recuperación. 
+                Brindamos atención técnica de alta calidad con el respeto y la calidez que tu familia merece.
+            </p>
+        </div>
+        <div class="image-box">
+            <img src="1.jpg" alt="Enfermería" onerror="this.src='https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=800&q=80'">
+        </div>
+    </section>
+
+    <!-- SERVICIOS -->
+    <h2 class="section-title">Servicios Profesionales</h2>
+    <div id="servicios-container" class="grid-layout">
+        <p style="text-align: center; grid-column: 1/-1;">Iniciando conexión segura...</p>
+    </div>
+
+    <!-- PAQUETES -->
+    <h2 class="section-title">Paquetes Disponibles</h2>
+    <div id="paquetes-container" class="grid-layout">
+        <p style="text-align: center; grid-column: 1/-1;">Buscando promociones...</p>
+    </div>
+
+    <!-- CONFIGURADOR -->
+    <div style="text-align: center; padding: 60px 20px; background: white; border-radius: 40px; margin: 60px 0; box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
+        <h2 style="font-family: 'Archivo Black'; margin-bottom: 15px; color: var(--azul-brillante);">¿NECESITAS ALGO ESPECÍFICO?</h2>
+        <p style="margin-bottom: 25px; font-weight: 600; opacity: 0.8;">Arma tu propio plan seleccionando solo las tareas que requieres.</p>
+        <button onclick="openModal()" class="btn-main" style="background: var(--azul-brillante); color: white; width: auto; padding: 18px 40px;">🔧 CONFIGURAR PAQUETE</button>
+    </div>
+</div>
+
+<!-- MODAL -->
+<div id="mS" class="modal">
+    <div class="modal-content">
+        <h2 style="text-align: center; font-family: 'Archivo Black'; margin-bottom: 10px;">TU PLAN A MEDIDA</h2>
+        <p style="text-align: center; font-size: 0.85rem; font-weight: 600; opacity: 0.7;">Selecciona las actividades que necesitas:</p>
+        
+        <div id="lista-detalles-modal" class="check-list"></div>
+        
+        <button onclick="enviarPaquetePersonalizado()" class="btn-main btn-blue">SOLICITAR COTIZACIÓN</button>
+        <p onclick="closeModal()" style="text-align: center; color: #888; font-weight: 700; cursor: pointer; margin-top: 20px; font-size: 0.8rem; text-transform: uppercase;">[ Volver a la página ]</p>
+    </div>
+</div>
+
+<script>
+    const SUPABASE_URL = 'https://jbziaunqooldnufptxwc.supabase.co'; 
+    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpiemlhdW5xb29sZG51ZnB0eHdjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgxNzU0MTMsImV4cCI6MjA5Mzc1MTQxM30.PvXafXho5RsWB2ga1nwVCeq0q8F9dZkZQT0z1caUK7w';
+    const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    const TELEFONO_WHATSAPP = "593999157200";
+
+    async function cargarContenido() {
+        try {
+            // --- 1. CARGAR SERVICIOS Y DETALLES PARA EL MODAL ---
+            const { data: servicios, error: errS } = await sb.from('servicios').select('*, detalles_servicio(*)');
+            const sCont = document.getElementById('servicios-container');
+            const dListModal = document.getElementById('lista-detalles-modal');
+            const detallesUnicos = new Set();
+
+            if (errS) throw errS;
+
+            if (servicios) {
+                sCont.innerHTML = '';
+                servicios.forEach(s => {
+                    const htmlDetalles = s.detalles_servicio.map(d => {
+                        detallesUnicos.add(d.contenido); // Guardar para el modal
+                        return `<li>${d.contenido}</li>`;
+                    }).join('');
+
+                    sCont.innerHTML += `
+                        <div class="card-item">
+                            <div class="card-img-container">
+                                <img src="${s.imagen_url}" class="card-img" onerror="this.style.display='none'">
+                            </div>
+                            <div class="card-body">
+                                <h3>${s.nombre}</h3>
+                                <ul>${htmlDetalles}</ul>
+                                <button onclick="irWhatsApp('Información: ${s.nombre}')" class="btn-main btn-blue">AGENDAR</button>
+                            </div>
+                        </div>`;
+                });
+
+                // Llenar el modal con los detalles únicos
+                dListModal.innerHTML = '';
+                Array.from(detallesUnicos).sort().forEach(item => {
+                    dListModal.innerHTML += `
+                        <label class="check-item">
+                            <input type="checkbox" value="${item}"> ${item}
+                        </label>`;
+                });
+            }
+
+            // --- 2. CARGAR PAQUETES ---
+            const { data: paquetes, error: errP } = await sb.from('paquetes').select('*, detalles_paquete(*)');
+            const pCont = document.getElementById('paquetes-container');
+
+            if (errP) throw errP;
+
+            if (paquetes && paquetes.length > 0) {
+                pCont.innerHTML = '';
+                paquetes.forEach(p => {
+                    const htmlDetallesP = p.detalles_paquete ? p.detalles_paquete.map(d => `<li>${d.contenido}</li>`).join('') : '';
+                    pCont.innerHTML += `
+                        <div class="card-item" style="border: 2px solid var(--promo-rosa)">
+                            <div class="card-img-container" style="background: var(--promo-rosa)">
+                                <img src="${p.imagen_url}" class="card-img" onerror="this.style.display='none'">
+                            </div>
+                            <div class="card-body">
+                                <h3>${p.nombre}</h3>
+                                <p style="font-size:0.8rem; opacity:0.7; margin-bottom:10px; font-weight:600;">${p.descripcion || ''}</p>
+                                <ul>${htmlDetallesP}</ul>
+                                <div class="price-tag">$${p.precio}</div>
+                                <button onclick="irWhatsApp('Interés en Paquete: ${p.nombre}')" class="btn-main btn-rosa">ME INTERESA</button>
+                            </div>
+                        </div>`;
+                });
+            } else {
+                pCont.innerHTML = '<p style="grid-column: 1/-1; text-align:center; opacity:0.5;">No hay paquetes activos hoy.</p>';
+            }
+
+        } catch (error) {
+            console.error("Error Supabase:", error);
+            document.body.innerHTML += `<div style="position:fixed; bottom:0; width:100%; background:red; color:white; padding:10px; text-align:center; z-index:999999">Error de conexión: ${error.message}</div>`;
+        }
+    }
+
+    // INTERACCIONES
+    function irWhatsApp(msg) {
+        const url = `https://wa.me/${TELEFONO_WHATSAPP}?text=${encodeURIComponent('Hola Enfermería 24/7! 👋 ' + msg)}`;
+        window.open(url, '_blank');
+    }
+
+    function openModal() { document.getElementById('mS').style.display='block'; document.body.style.overflow='hidden'; }
+    function closeModal() { document.getElementById('mS').style.display='none'; document.body.style.overflow='auto'; }
+
+    function enviarPaquetePersonalizado() {
+        const checks = document.querySelectorAll('#lista-detalles-modal input:checked');
+        const items = [];
+        checks.forEach(c => items.push(c.value));
+        
+        if(items.length > 0) {
+            const mensaje = "Hola! Quisiera una cotización para un plan personalizado que incluya:\n\n✅ " + items.join("\n✅ ");
+            irWhatsApp(mensaje);
+        } else {
+            alert("Por favor, selecciona al menos una opción.");
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', cargarContenido);
+</script>
+
+</body>
+</html>
